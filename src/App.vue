@@ -12,36 +12,25 @@
     <a v-for="a in menu" :key="a">{{a}}</a>
   </div>
 
-  <div>
-    <img src="./assets/room0.jpg" class="room-img">
-    <h4 @click="modal = true">{{products[0]}}</h4>
-    <p>50 만원</p>
-    <button @click="declarations[0]++">허위매물신고</button> 
-    <span>신고수 : {{declarations[0]}}</span>
-  </div>
-  <div>
-    <img src="./assets/room1.jpg">
-    <h4>{{products[1]}}</h4>
-    <p>60 만원</p>
-    <button @click="declarations[1]++">허위매물신고</button> 
-    <span>신고수 : {{declarations[1]}}</span>
-  </div>
-  <div>
-    <img src="./assets/room2.jpg">
-    <h4>{{products[2]}}</h4>
-    <p>70 만원</p>
-    <button @click="declarations[2]++">허위매물신고</button> 
-    <span>신고수 : {{declarations[2]}}</span>
+  <div v-for="room in onerooms" :key="room">
+    <img :src="room.image" class="room-img">
+    <h4 @click="modal = true">{{room.title}}</h4>
+    <p>{{room.price}}원</p>
+    <!-- <button @click="declarations[room]++">허위매물신고</button>  -->
+    <!-- <span>신고수 : {{declarations[room]}}</span> -->
   </div>
 
 </template>
 
 <script>
 
+import data from './assets/oneroom';
+
 export default {
   name: 'App',
   data(){
     return{
+      onerooms : data,
       modal : false,
       declarations : [0,0,0],
       menu : ['Home', 'Shop', 'About'],
