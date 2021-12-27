@@ -1,23 +1,17 @@
 <template>
 
-  <div class="black-bg" v-if="modal == true">
-    <div class="white-bg">
-      <h4>상세페이지임</h4>
-      <p>상세페이지 내용임</p>
-      <button @click="modal = false">닫기</button>
-    </div>
-  </div>
+  <Modal :onerooms="onerooms" :clickNum="clickNum" :modal="modal" />
 
   <div class="menu">
     <a v-for="a in menu" :key="a">{{a}}</a>
   </div>
 
-  <div v-for="room in onerooms" :key="room">
-    <img :src="room.image" class="room-img">
-    <h4 @click="modal = true">{{room.title}}</h4>
-    <p>{{room.price}}원</p>
-    <!-- <button @click="declarations[room]++">허위매물신고</button>  -->
-    <!-- <span>신고수 : {{declarations[room]}}</span> -->
+  <Discount/>
+
+  <div v-for="(room,i) in onerooms" :key="i">
+    <img :src="onerooms[i].image" class="room-img">
+    <h4 @click="modal = true; clickNum = i">{{onerooms[i].title}}</h4>
+    <p>{{onerooms[i].price}}원</p>
   </div>
 
 </template>
@@ -25,11 +19,14 @@
 <script>
 
 import data from './assets/oneroom';
+import Discount from './Discount.vue';
+import Modal from './Modal.vue';
 
 export default {
   name: 'App',
   data(){
     return{
+      clickNum : 0,
       onerooms : data,
       modal : false,
       declarations : [0,0,0],
@@ -43,6 +40,8 @@ export default {
     }
   },
   components: {
+    Discount : Discount,
+    Modal
   }
 }
 </script>
@@ -54,6 +53,13 @@ body {
 
 div{
   box-sizing: border-box;
+}
+
+.discount{
+  background: #eee;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
 }
 
 .black-bg{
