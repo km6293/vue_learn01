@@ -6,13 +6,9 @@
     <a v-for="a in menu" :key="a">{{a}}</a>
   </div>
 
-  <Discount/>
+  <Discount />
+  <Card :oneroom="onerooms[i]" v-for=" (a,i) in onerooms" :key="a" />
 
-  <div v-for="(room,i) in onerooms" :key="i">
-    <img :src="onerooms[i].image" class="room-img">
-    <h4 @click="modal = true; clickNum = i">{{onerooms[i].title}}</h4>
-    <p>{{onerooms[i].price}}원</p>
-  </div>
 
 </template>
 
@@ -21,11 +17,17 @@
 import data from './assets/oneroom';
 import Discount from './Discount.vue';
 import Modal from './Modal.vue';
+import Card from './Card.vue';
 
 export default {
   name: 'App',
+  // 데이터는 한 곳에 보관하고 필요하면 가져다 씀. ex) props로 부모 -> 자식 
   data(){
     return{
+      object : {
+        name : 'kim',
+        age : 20
+      },
       clickNum : 0,
       onerooms : data,
       modal : false,
@@ -40,8 +42,10 @@ export default {
     }
   },
   components: {
+    // 밑 3개 같은 의미
     Discount : Discount,
-    Modal
+    Modal,
+    Card
   }
 }
 </script>
