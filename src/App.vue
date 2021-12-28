@@ -1,15 +1,14 @@
 <template>
-
-  <Modal :onerooms="onerooms" :clickNum="clickNum" :modal="modal" />
+  <Modal @closeModal="modal = false" :onerooms="onerooms" :clickNum="clickNum" :modal="modal" />
 
   <div class="menu">
     <a v-for="a in menu" :key="a">{{a}}</a>
   </div>
 
   <Discount />
-  <Card :oneroom="onerooms[i]" v-for=" (a,i) in onerooms" :key="a" />
-
-
+  <!-- 자식이 값 변경 못해서 메시지만 보냄. 자식한테 받은거 똑같은 작명으로 쓰면 됨 -->
+  <Card @openModal="modal = true; clickNum = $event" :oneroom="onerooms[i]" v-for=" (a,i) in onerooms" :key="i" />
+    
 </template>
 
 <script>

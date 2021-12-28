@@ -5,7 +5,7 @@
       <h4>{{onerooms[clickNum].title}}</h4>
       <p>{{onerooms[clickNum].content}}</p>
       <p>{{onerooms[clickNum].price}} 원</p>
-      <!-- <button @click="modal = false">닫기</button> -->
+      <button @click="$emit('closeModal')">닫기</button>
     </div>
   </div>
 </template>
