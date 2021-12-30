@@ -12,6 +12,12 @@
   </div>
 
   <Discount />
+  
+  <button @click="priceSort">가격순정렬</button>
+  <button @click="reversePriceSort">가격역순정렬</button>
+  <button @click="LetterSort">가나다순정렬</button>
+  <button @click="sortBack">되돌리기</button>
+
   <!-- 자식이 값 변경 못해서 메시지만 보냄. 자식한테 받은거 똑같은 작명으로 쓰면 됨 -->
   <Card @openModal="modal = true; clickNum = $event" :oneroom="onerooms[i]" v-for=" (a,i) in onerooms" :key="i" />
     
@@ -34,6 +40,8 @@ export default {
         age : 20
       },
       clickNum : 0,
+      // [...] -> array/object 데이터의 각각 별개의 사본
+      oneroomsOriginal : [...data],
       onerooms : data,
       modal : false,
       declarations : [0,0,0],
@@ -44,6 +52,26 @@ export default {
   methods: {
     increase(){
       this.declarations += 1
+    },
+    sortBack(){
+      this.onerooms = [...this.oneroomsOriginal]
+    },
+    priceSort(){
+      this.onerooms.sort(function(a,b){
+        return a.price - b.price
+      })
+    },
+    reversePriceSort(){
+      this.onerooms.sort(function(a,b){
+        return b.price - a.price
+      })
+    },
+    LetterSort(){
+      // - 이면 왼쪽 + 이면 오른쪽
+      this.onerooms.sort(function(a, b){
+        return a.title.localeCompare(b.title)
+      });
+
     }
   },
   components: {
@@ -51,7 +79,7 @@ export default {
     Discount : Discount,
     Modal,
     Card
-  }
+  },
 }
 </script>
 
