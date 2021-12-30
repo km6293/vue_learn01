@@ -1,5 +1,11 @@
 <template>
-  <Modal @closeModal="modal = false" :onerooms="onerooms" :clickNum="clickNum" :modal="modal" />
+
+  <!-- <div class="start" :class="{ end : modal }"> -->
+  <!-- 애니메이션 밑이 위랑 똑같은것 css도 마찬가지 -->
+  <transition name="fade">
+    <Modal @closeModal="modal = false" :onerooms="onerooms" :clickNum="clickNum" :modal="modal" />
+  </transition>
+  <!-- </div> -->
 
   <div class="menu">
     <a v-for="a in menu" :key="a">{{a}}</a>
@@ -50,6 +56,25 @@ export default {
 </script>
 
 <style>
+
+.fade-leave-from{ opacity: 1; }
+.fade-leave-active{ transition: all 1s; }
+.fade-leave-to { opacity: 0; }
+
+.fade-enter-from{ transform: translateY(-1000px); }
+.fade-enter-active{ transition: all 1s; }
+.fade-enter-to { transform: translateY(0px); }
+
+
+/* .start{
+  opacity: 0;
+  transition: all 1s;
+}
+
+.end{
+  opacity: 1;
+} */
+
 body {
   margin : 0
 }
