@@ -11,7 +11,7 @@
     <a v-for="a in menu" :key="a">{{a}}</a>
   </div>
 
-  <Discount />
+  <Discount v-if="showDiscount == true" :discountNum="discountNum" />
   
   <button @click="priceSort">가격순정렬</button>
   <button @click="reversePriceSort">가격역순정렬</button>
@@ -35,6 +35,8 @@ export default {
   // 데이터는 한 곳에 보관하고 필요하면 가져다 씀. ex) props로 부모 -> 자식 
   data(){
     return{
+      discountNum : 30,
+      showDiscount : true,
       object : {
         name : 'kim',
         age : 20
@@ -73,6 +75,25 @@ export default {
       });
 
     }
+  },
+
+  // // lifecycle.. 10개정도 있는데 찾아보면 됨.
+  // mounted(){
+  //   // arrow function 밖에 있는 this를 제대로 가져다 줄 수 있음.
+  //   setTimeout(() =>{
+  //     this.showDiscount = false;
+  //   },2000);
+  // },
+
+  // 결제 할인 0퍼면 멈추기
+  mounted(){
+    setInterval(() => {
+      if(this.discountNum == 0){
+        clearInterval();
+      }else{
+        this.discountNum --
+      }
+    }, 1000)
   },
   components: {
     // 밑 3개 같은 의미

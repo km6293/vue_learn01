@@ -31,12 +31,18 @@ export default {
         alert("숫자만 입력 가능합니다.");
         this.month = 1
       } 
-    }
+    },
   },
   props : {
     onerooms : Array,
     clickNum : Number,
     modal : Boolean
+  },
+  updated(){
+    if(this.month == 2){
+      alert('2는 좀');
+      this.month = 3
+    }
   }
 }
 </script>
