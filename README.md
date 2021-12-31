@@ -1,4 +1,4 @@
-# hello-vue
+# Vue로 만든 간단 기능 웹
 
 ## Project setup
 ```
